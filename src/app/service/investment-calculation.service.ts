@@ -1,5 +1,9 @@
+import { Injectable } from "@angular/core";
 import { InvestmentData } from "../model/investment-data.model";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class InvestmentCalculation {
 
 

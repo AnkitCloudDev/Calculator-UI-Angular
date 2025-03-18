@@ -1,39 +1,22 @@
 import { Component, Input } from '@angular/core';
+import { InvestmentCalculation } from '../../service/investment-calculation.service';
+import { InvestmentData } from '../../model/investment-data.model';
 
 @Component({
   selector: 'app-investment-result',
   standalone: true,
   imports: [],
   templateUrl: './investment-result.component.html',
-  styleUrl: './investment-result.component.css'
+  styleUrl: './investment-result.component.css',
+  providers: [InvestmentCalculation]
 })
 export class InvestmentResultComponent {
-  @Input() initialInvestment: number = 0;
-  @Input() annualInvestment: number = 0;
-  @Input() expectedReturn: number = 0;
-  @Input() duration: number = 0;
+  @Input() investmentData!: InvestmentData;
   @Input() investmentResults: any[] = [];
+  constructor(private investmentCalculationService: InvestmentCalculation) {}
+
 
   calculateInvestmentResults() {
-    const annualData = [];
-    let investmentValue = this.initialInvestment;
-
-    for (let i = 0; i < this.duration; i++) {
-      const year = i + 1;
-      const interestEarnedInYear = investmentValue * (this.expectedReturn / 100);
-      investmentValue += interestEarnedInYear + this.annualInvestment;
-      const totalInterest =
-        investmentValue - this.annualInvestment * year - this.initialInvestment;
-      annualData.push({
-        year: year,
-        interest: interestEarnedInYear,
-        valueEndOfYear: investmentValue,
-        annualInvestment: this.annualInvestment,
-        totalInterest: totalInterest,
-        totalAmountInvested: this.initialInvestment + this.annualInvestment * year,
-      });
-    }
-
-    return annualData;
-  }
+    this.investmentResults = this.investmentCalculationService.calculateInvestmentResults(this.investmentData);
 }
+  }
