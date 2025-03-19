@@ -1,16 +1,21 @@
+<p *ngIf="!investmentResults"> Please enter values for calculations</p>
 <table>
-  <tr>
-    <th>Investment</th>
-    <th>Amount</th>
-    <th>Interest</th>
-    <th>Years</th>
-    <th>Result</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Investment</th>
+      <th>Amount</th>
+      <th>Interest</th>
+      <th>Years</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+<tbody>
   <tr *ngFor="let investment of investmentResults">
-    <td>{{ investment.totalAmountInvested }}</td>
-    <td>{{ investment.annualInvestment }}</td>
-    <td>{{ investment.totalInterest }}</td>
-    <td>{{ investment.years }}</td>
-    <td>{{ investment.valueEndOfYear }}</td>
+    <td>{{ investment.totalAmountInvested | currency }}</td>
+    <td>{{ investment.annualInvestment | currency }}</td>
+    <td>{{ investment.totalInterest | currency }}</td>
+    <td>{{ investment.year }}</td>
+    <td>{{ investment.valueEndOfYear | currency}}</td>
   </tr>
+</tbody>
 </table>
