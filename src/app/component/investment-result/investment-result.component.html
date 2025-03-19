@@ -1,3 +1,16 @@
 <table>
-  <thead></thead>
+  <tr>
+    <th>Investment</th>
+    <th>Amount</th>
+    <th>Interest</th>
+    <th>Years</th>
+    <th>Result</th>
+  </tr>
+  <tr *ngFor="let investment of investmentResults">
+    <td>{{ investment.totalAmountInvested }}</td>
+    <td>{{ investment.annualInvestment }}</td>
+    <td>{{ investment.totalInterest }}</td>
+    <td>{{ investment.years }}</td>
+    <td>{{ investment.valueEndOfYear }}</td>
+  </tr>
 </table>
